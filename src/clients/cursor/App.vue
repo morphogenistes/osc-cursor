@@ -15,8 +15,11 @@
 <style>
 #cursorOverlay, #bg {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100vh;
+  /* max-height: 100vh; */
   position: absolute;
+  overflow: hidden;
   top: 0; right: 0; bottom: 0; left: 0;
 }
 #cursorOverlay {
@@ -43,6 +46,7 @@ export default {
   },
   created() {},
   async mounted() {
+    document.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
     document.addEventListener('pointerdown', this.onTouchStart, false);
     document.addEventListener('pointermove', this.onTouchMove, false);
     document.addEventListener('pointerup', this.onTouchRelease, false);
@@ -63,6 +67,7 @@ export default {
       this.showPointer = true;
     },
     onTouchMove(e) {
+      e.preventDefault();
       if (this.showPointer) {
         const { center, cursor, localPos } = this.processPointerEvent(e);
         // console.log("mousedrag");

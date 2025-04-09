@@ -2,6 +2,14 @@
 
 ### a single-client soundworks app sending cursor information (pressed, position) via OSC
 
+## Dev notes
+
+On iOS 15 Safari, one can save a web page locally by "adding it to home screen" (from the "share" button located to the right of the address bar), and get rid of the annoying pinch gestures that occur on regular web pages. For this to work the following meta tag must be added in the html header : `<meta name="apple-mobile-web-app-capable" content="yes">`
+see : https://stackoverflow.com/a/3025169
+
+Also, this post was useful : https://stackoverflow.com/a/49853392
+Add the following snippet to get rid of buggy scroll behaviour when resizing the page by shrinking the address bar : `document.body.addEventListener('touchmove', preventDefault, { passive: false });`
+
 ## Available npm scripts
 
 ### `npm run dev`
