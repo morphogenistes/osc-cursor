@@ -1,0 +1,6 @@
+name: osc-cursor
+author: ""
+clients:
+  cursor:
+    target: browser
+    default: true
