@@ -40,6 +40,7 @@ export default {
   inject: [ '$store', '$localStore' ],
   data() {
     return {
+      pointerId: undefined,
       pointer: [0, 0],
       showPointer: false,
     };
@@ -58,6 +59,8 @@ export default {
   },
   methods: {
     onTouchStart(e) {
+      if (this.pointerId !== undefined) return;
+      this.pointerId = e.pointerId;
       const { center, cursor, localPos } = this.processPointerEvent(e);
       // console.log("mousedown");
       console.log(localPos);
@@ -67,7 +70,8 @@ export default {
       this.showPointer = true;
     },
     onTouchMove(e) {
-      e.preventDefault();
+      if (this.pointerId !== e.pointerId) return;
+      // e.preventDefault();
       if (this.showPointer) {
         const { center, cursor, localPos } = this.processPointerEvent(e);
         // console.log("mousedrag");
@@ -77,6 +81,8 @@ export default {
       }
     },
     onTouchRelease(e) {
+      if (e.pointerId !== this.pointerId) return;
+      this.pointerId = undefined;
       if (this.showPointer) {
         // console.log("mouseup");
         this.showPointer = false;
